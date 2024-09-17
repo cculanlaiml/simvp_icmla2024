@@ -208,5 +208,34 @@ ls work_dirs/Debug/saved
 inputs      metrics.npy preds       trues
 ```
 
+# CUDA
+Charliecloud supports running nvidia CUDA code with some effort.
+First we must extract our container image.
+Then we add CUDA secret sauce with `ch-fromhost --nvidia`
+Finally we run on the modified image.
+
+```
+$ ch-convert simvp $HOME/simvp-cuda
+discarding xattrs...
+input:   ch-image  simvp
+output:  dir       /home/rgoff/simvp-cuda
+exporting ...
+done
+$ ch-fromhost --nvidia $HOME/simvp-cuda
+(from /etc/ld.so.conf.d/988_cuda-12.conf:1 and /etc/ld.so.conf.d/000_cuda.conf:1)
+(from /etc/ld.so.conf.d/cuda.conf:1 and /etc/ld.so.conf.d/000_cuda.conf:1)
+(from /etc/ld.so.conf.d/gds-12-6.conf:1 and /etc/ld.so.conf.d/000_cuda.conf:1)
+(from /etc/ld.so.conf.d/x86_64-linux-gnu.conf:4 and /etc/ld.so.conf.d/x86_64-linux-gnu.conf:3)
+(from <builtin>:0 and /etc/ld.so.conf.d/x86_64-linux-gnu.conf:3)
+(from <builtin>:0 and /etc/ld.so.conf.d/x86_64-linux-gnu.conf:3)
+(from <builtin>:0 and <builtin>:0)
+error: not a directory: /home/rgoff/simvp-cuda/usr/local/cuda/compat/lib
+# I am ignoring the error it didn't seem to hurt me at execution
+
+$ ch-run -w -b $HOME/data_boiling:/mnt/0 $HOME/simvp-cuda -- python /simvp/train_simvp_standalone.py --datafile_in /mnt/0/$MY_LOADER --pre_seq_length 10 --aft_seq_length 10 --device cuda --config_file /simvp-main/configs/SimVP_super_simple.py
+```
+
+Running from a flat directory is not a charliecloud best practice, this is done to simplify the example. You should take that directory and turn it back into a squash filesystem.
+
 # Visualization
 You can follow the original readme for visualiztion on the host
