@@ -1,0 +1,6 @@
+FROM nvcr.io/nvidia/pytorch:24.08-py3
+
+COPY . /simvp-main
+
+RUN pip3 install protobuf==3.20.2 fvcore numpy timm opencv-python==4.8.0.74 scikit-image matplotlib
+
