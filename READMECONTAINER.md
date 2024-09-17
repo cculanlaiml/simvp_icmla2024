@@ -143,7 +143,7 @@ do this:
 > machine
 
 ```
-export MY_LOADER='$HOME/data_boiling/76dd1dd95b0990f1e364a48b284e531b035ed92ad96e4a61aa91ae086ac86b0b_loaders.json'
+export MY_LOADER='76dd1dd95b0990f1e364a48b284e531b035ed92ad96e4a61aa91ae086ac86b0b_loaders.json'
 ```
 
 ## Test Running Training a Model
@@ -156,7 +156,7 @@ and the loss decrease.
 
 ```
 export LOCAL_RANK=0  # for now, we have to do this, it's a bug in our code
-ch-run -b $HOME/data_boiling:/mnt/0 simvp -- python /simvp/train_simvp_standalone.py --datafile_in $MY_LOADER --pre_seq_length 10 --aft_seq_length 10 --epoch 10 --batch_size 2 --val_batch_size 2 --device cpu --config_file /simvp/configs/SimVP_super_simple.py
+ch-run -b $HOME/data_boiling:/mnt/0 simvp -- python /simvp/train_simvp_standalone.py --datafile_in /mnt/0/$MY_LOADER --pre_seq_length 10 --aft_seq_length 10 --epoch 10 --batch_size 2 --val_batch_size 2 --device cpu --config_file /simvp/configs/SimVP_super_simple.py
 ```
 
 You might get a result that looks sort of like this:
