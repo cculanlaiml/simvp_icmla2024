@@ -1,3 +1,7 @@
+# This file was modified by multiple contributors.
+# It includes code originally from the OpenSTL project (https://github.com/chengtan9907/OpenSTL).
+# The original code is licensed under the Apache License, Version 2.0.
+
 import math
 import warnings
 

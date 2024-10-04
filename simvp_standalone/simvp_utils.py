@@ -1,3 +1,9 @@
+# Copyright (c) CAIRI AI Lab. All rights reserved
+
+# This file was modified by multiple contributors.
+# It includes code originally from the OpenSTL project (https://github.com/chengtan9907/OpenSTL).
+# The original code is licensed under the Apache License, Version 2.0.
+
 import json
 import os
 import random
